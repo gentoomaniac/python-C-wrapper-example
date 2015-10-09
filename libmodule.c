@@ -33,9 +33,22 @@ static PyObject* fak_wrapper(PyObject* self, PyObject* args)
   return Py_BuildValue("i", result);
 }
 
+static PyObject* create_dict(PyObject* self, PyObject* args)
+{
+  PyObject* dict = PyDict_New();
+  PyObject* elementA = Py_BuildValue("i", 42);
+  PyObject* elementB = PyString_FromString("what is the answer to life, the universe and everything?");
+
+  PyDict_SetItemString(dict, "answer", elementA);
+  PyDict_SetItemString(dict, "question", elementB);
+
+  return dict;
+}
+
 static PyMethodDef HelloMethods[] = {
      { "hello", hello_wrapper, METH_VARARGS, "Say hello" },
      { "fak", fak_wrapper, METH_VARARGS, "faculty" },
+     { "create_dict", create_dict, METH_VARARGS, "create sample dict" },
       { NULL, NULL, 0, NULL }
 };
 
